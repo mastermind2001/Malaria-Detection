@@ -1,33 +1,51 @@
-from PIL import Image
+import os
+import re
 import numpy as np
-import streamlit as st
+from PIL import Image
+from tensorflow.keras.models import load_model
 import tensorflow as tf
+from flask import Flask, redirect, url_for, request, render_template
+from werkzeug.utils import secure_filename
+
+app = Flask(__name__)
+
+MODEL_PATH ='model.h5'
+
+model = load_model(MODEL_PATH)
+
+def model_predict(img_path, model):
+    image = Image.open(img_path)
+    img = image.resize((100, 100))
+    img = np.asarray(img).reshape((1, 100, 100, 3))/255
+    prediction = np.squeeze(model.predict(img))
+    if prediction < 0.5:
+        prediction = 0
+    else:
+        prediction = 1
+    
+    classes = {0:"Normal",1:"Malaria"}
+    
+    return classes[(prediction)]
 
 
-def predict(image, model):
-	img = image.resize((100, 100))
-	img = np.asarray(img).reshape((1, 100, 100, 3)) / 255
-	prediction = np.squeeze(model.predict(img))
-	return 0 if prediction < 0.5 else 1
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 
+@app.route('/predict', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        f = request.files['file']
+        basepath = os.path.dirname(__file__)
+        file_path = os.path.join(
+            basepath, secure_filename(f.filename))
+        f.save(file_path)
 
-st.write("""
-         # Malaria Classification
-         """
-         )
+        preds = model_predict(file_path, model)
+        return preds
+    return None
 
-file = st.file_uploader("Please upload an image file", type=["png"])
 
-model = tf.keras.models.load_model('model.h5')
-
-labels = ['Normal', 'Malaria']
-
-if file is None:
-	st.text("Please upload an image file")
-
-else:
-	image = Image.open(file)
-	prediction = predict(image, model)
-	st.image(image, width=260, caption="Prediction : " + labels[prediction])
-
+if __name__ == '__main__':
+    app.run(debug =True)

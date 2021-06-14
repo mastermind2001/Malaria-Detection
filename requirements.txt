@@ -1,4 +1,4 @@
-tensorflow==2.3.2
-streamlit==0.76.0
-numpy==1.18.5
-pillow==8.1.0
+gunicorn
+Pillow==8.2.0
+tensorflow-cpu==2.4.1
+Flask==2.0.1
