@@ -10,7 +10,7 @@ So, I've used segmented cells from the thin blood smear slide images to classify
 ## Project Details
 
 I have used Keras (an open source neural network library) to build this classifier. The model (Model.ipynb) contains a self-
-made ConvNet (Convolutional Neural Network) that has around 4 convlutional layers, 4 Max Pool layers and 2 dense layers having 
+made ConvNet (Convolutional Neural Network) that has around 4 convolutional layers, 4 Max Pool layers and 2 dense layers having 
 'relu' activation unit. The last layer has the 'sigmoid' activation unit to classify  cell images having Malaria or not. It has around 336017 trainable parameters.
 
 I have got around <strong>96% accuracy</strong> in the Test set.
