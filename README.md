@@ -26,7 +26,7 @@ The dataset contains two folders
 
 And a total of 27,558 images.
 <br><br>
-Datatset Source : <strong>Kaggle</strong>
+Dataset Source : <strong>Kaggle</strong>
 
 In order to use this model for this dataset, you have to organize the data in a particular format.
 
