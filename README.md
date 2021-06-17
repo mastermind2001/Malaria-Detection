@@ -2,8 +2,7 @@
 
 ## Overview
 
-Malaria is a mosquito-borne infectious disease that affects humans and other animals. Malaria causes symptoms that typically  
-include fever, tiredness, vomiting, and headaches. In severe cases it can cause yellow skin, seizures, coma, or death.Malaria 
+Malaria is a mosquito-borne infectious disease that affects humans and other animals. Malaria causes symptoms that typically include fever, tiredness, vomiting, and headaches. In severe cases it can cause yellow skin, seizures, coma, or death.Malaria 
 is typically diagnosed by the microscopic examination of blood using blood films, or with antigen-based rapid diagnostic tests.
 So, I've used segmented cells from the thin blood smear slide images to classify whether a person has malaria or not.
 <br><br>
